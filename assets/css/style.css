@@ -6,7 +6,26 @@ body {
   padding: 0;
 }
 
-header, footer {
+/* Hero header with background image */
+.hero {
+  background: url("assets/images/hero-bg.jpg") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 3em 1em;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.2em;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+/* Footer stays separate */
+footer {
   background: linear-gradient(90deg, #007acc, #005f99);
   background-color: #007acc;
   color: white;
