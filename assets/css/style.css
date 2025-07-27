@@ -23,7 +23,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  background-color: rgba(0, 0, 0, 0.35); /* lighter overlay */
   z-index: 0;
 }
 
@@ -34,11 +34,19 @@ body {
   z-index: 1;
 }
 
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+}
 
-/* Footer stays separate */
+.hero p {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+/* Footer styling */
 footer {
   background: linear-gradient(90deg, #007acc, #005f99);
-  background-color: #007acc;
   color: white;
   padding: 1em;
   text-align: center;
@@ -100,5 +108,13 @@ section h2 {
   .project {
     padding: 1em;
     margin-bottom: 1.5em;
+  }
+
+  .hero h1 {
+    font-size: 1.8em;
+  }
+
+  .hero p {
+    font-size: 1em;
   }
 }
