@@ -46,10 +46,11 @@ body {
 
 /* Footer styling */
 footer {
-  background: linear-gradient(90deg, #007acc, #005f99);
+  background: url("../images/hero-bg.jpg") center/cover no-repeat;
   color: white;
-  padding: 1em;
+  padding: 1.5em 1em;
   text-align: center;
+  font-size: 0.9em;
 }
 
 nav a {
