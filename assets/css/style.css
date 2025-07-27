@@ -9,7 +9,7 @@ body {
 /* Hero header with background image */
 .hero {
   position: relative;
-  background: url("assets/images/hero-bg.jpg") center/cover no-repeat;
+  background: url("../images/hero-bg.jpg") center/cover no-repeat;
   color: white;
   text-align: center;
   padding: 4em 1em;
