@@ -7,6 +7,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .about-section {
+      padding: 3em 1.5em 2em;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .about-section h1 {
+      font-size: 2em;
+      margin-bottom: 1em;
+      font-weight: 600;
+    }
+
+    .about-section p {
+      font-size: 1.1em;
+      line-height: 1.6em;
+      margin-bottom: 1.2em;
+    }
+
+    .about-section p:last-of-type {
+      margin-bottom: 1.5em;
+      /* reduce spacing before Core Competencies */
+    }
+
+    .competencies {
+      max-width: 900px;
+      margin: 0 auto 3em;
+      padding: 0 1.5em;
+    }
+
+    .competencies h2 {
+      margin-bottom: 1em;
+      font-weight: 600;
+      font-size: 1.4em;
+    }
+
+    .competencies ul {
+      padding-left: 1.5em;
+    }
+
+    .competencies li {
+      margin-bottom: 0.6em;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +65,7 @@
   </header>
 
   <main>
-    <section class="intro-section">
+    <section class="about-section">
       <h1>Hello, my name is Dmitriy Kerget</h1>
       <p>
         I am a Cloud Network Engineer with over 10 years of experience designing, deploying, and securing hybrid and
@@ -37,7 +82,7 @@
       </p>
     </section>
 
-    <section class="core-competencies">
+    <section class="competencies">
       <h2>Core Competencies</h2>
       <ul>
         <li>Azure Infrastructure & Security</li>
