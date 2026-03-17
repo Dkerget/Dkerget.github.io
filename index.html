@@ -1,60 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <title>Dmitriy Kerget | Cloud Network Engineer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dmitriy Kerget | Cloud Network Engineer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0d12;--bg2:#0f1318;--bg3:#141920;
+  --green:#00ff88;--green2:#00cc6a;--blue:#4fc3f7;
+  --text:#e2e8f0;--muted:#8892a4;--border:#1e2733;
+  --card:#111720;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Courier New',monospace;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+a{color:var(--green);text-decoration:none}
+a:hover{color:var(--green2)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,13,18,0.92);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);padding:0 2rem}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-size:1.1rem;font-weight:700;color:var(--green);letter-spacing:2px}
+.logo span{color:var(--muted)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--muted);font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--green)}
+.btn{display:inline-block;padding:8px 18px;border-radius:3px;font-size:0.78rem;letter-spacing:1px;font-family:'Courier New',monospace;text-transform:uppercase;transition:all 0.2s}
+.btn-primary{background:var(--green);color:#0a0d12;font-weight:700}
+.btn-primary:hover{background:var(--green2);color:#0a0d12}
+.btn-outline{border:1px solid var(--green);color:var(--green);background:transparent}
+.btn-outline:hover{background:rgba(0,255,136,0.08)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--muted)}
+#nav-toggle{display:none}
+
+/* LAYOUT */
+.page{max-width:960px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0}
+.section-label{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem}
+
+/* HERO */
+#hero{padding-top:8rem;padding-bottom:4rem;min-height:100vh;display:flex;align-items:center;background:radial-gradient(ellipse at 15% 50%,rgba(0,255,136,0.04) 0%,transparent 55%);max-width:100%}
+.hero-inner{max-width:960px;margin:0 auto;padding:0 2rem;width:100%}
+.hero-status{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,136,0.07);border:1px solid rgba(0,255,136,0.2);padding:6px 14px;border-radius:4px;font-size:0.72rem;letter-spacing:1px;color:var(--green);margin-bottom:2rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1.hero-name{font-size:clamp(2rem,5vw,3.4rem);color:var(--text);letter-spacing:-1px;margin-bottom:0.4rem}
+h1.hero-name span{color:var(--green)}
+.hero-role{font-size:clamp(0.95rem,2.2vw,1.25rem);color:var(--blue);margin-bottom:1.5rem;font-weight:400}
+.hero-desc{max-width:620px;color:var(--muted);font-size:0.92rem;line-height:1.85;margin-bottom:2.5rem;font-family:system-ui,sans-serif}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.timeline-intro{font-size:0.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem}
+.journey{display:flex;flex-direction:column;gap:0;max-width:560px}
+.jstep{display:flex;gap:16px;align-items:flex-start}
+.jline{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:20px}
+.jdot{width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid var(--bg);flex-shrink:0;margin-top:4px}
+.jdot.dim{background:var(--border)}
+.jconnect{width:1px;height:28px;background:var(--border);margin:2px 0}
+.jcontent{padding-bottom:24px}
+.jyear{font-size:0.7rem;color:var(--green);letter-spacing:1px;margin-bottom:2px}
+.jtext{font-size:0.85rem;color:var(--muted);font-family:system-ui,sans-serif}
+.jtext strong{color:var(--text);font-weight:500}
+
+/* PHILOSOPHY */
+#philosophy{border-top:1px solid var(--border)}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.phil-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;border-left:2px solid var(--green)}
+.phil-card h3{font-size:0.85rem;color:var(--green);letter-spacing:1px;margin-bottom:0.8rem;text-transform:uppercase}
+.phil-card p{font-size:0.88rem;color:var(--muted);line-height:1.75;font-family:system-ui,sans-serif}
+
+/* FOCUS */
+#focus{border-top:1px solid var(--border)}
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
+.focus-item{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.4rem;transition:border-color 0.2s}
+.focus-item:hover{border-color:rgba(79,195,247,0.3)}
+.focus-icon{font-size:0.7rem;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.7rem}
+.focus-item h3{font-size:0.92rem;color:var(--text);margin-bottom:0.5rem}
+.focus-item p{font-size:0.82rem;color:var(--muted);line-height:1.7;font-family:system-ui,sans-serif}
+
+/* CTA STRIP */
+#cta-strip{border-top:1px solid var(--border);padding:4rem 0}
+.cta-box{background:var(--card);border:1px solid rgba(0,255,136,0.2);border-radius:8px;padding:3rem;text-align:center}
+.cta-box h2{font-size:1.6rem;margin-bottom:1rem;color:var(--text)}
+.cta-box h2 span{color:var(--green)}
+.cta-box p{color:var(--muted);font-family:system-ui,sans-serif;font-size:0.92rem;max-width:520px;margin:0 auto 2rem;line-height:1.8}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:0.75rem;font-family:'Courier New',monospace}
+footer span{color:var(--green)}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
+.footer-links a{color:var(--muted);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--green)}
+
+@media(max-width:768px){
+  .phil-grid,.focus-grid{grid-template-columns:1fr}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,13,18,0.98);border-bottom:1px solid var(--border);flex-direction:column;padding:1.5rem 2rem;gap:1.5rem}
+  #nav-toggle:checked~.nav-links{display:flex}
+  .hamburger{display:flex}
+  section{padding:3.5rem 0}
+}
+</style>
 </head>
-
 <body>
-  <header class="hero">
-    <h1>Dmitriy Kerget</h1>
-    <nav>
-      <a href="about.html">About</a> |
-      <a href="projects.html">Projects</a> |
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="intro-section">
-      <p>
-        <a href="assets/docs/KD_CV_2025.pdf" download>📄  Download My Resume</a>
-      </p>      
-      <h1>Cloud Network Engineer & Infrastructure Specialist delivering secure, scalable Azure solutions.</h1>
-      <p>
-        I build Azure environments that are clean, resilient, reliable, and easy to understand. 
-        My focus is on secure cloud architecture that work consistently and scale with you, whether
-        you are adopting Copilot, Fabric, or the next wave of Microsoft technologies.
-      </p>
-      <p>
-        My IT journey began in 2007 as a network administrator. Working in budget tight environments
-        meant wearing many hats and keeping systems secure without room for mistakes. 
-        I learned the hard way to become the person who understood every part of the infrastructure 
-        and made sure it was secure.
-      </p>
-      <p>
-        Over the years, one principle became clear: strong cloud infrastructure isn’t about enabling every feature.
-        It’s about selecting what fits the business, building it correctly from day one, and ensuring security,
-        cost control, automation, and Microsoft 365 integration all work seamlessly together.
-      </p>
-      <p>
-        I help organizations avoid the chaos of messy configurations, compliance gaps, and hidden security issues.
-        Today, I’m focused on mastering practical AI adoption, secure implementation patterns, and the technologies
-        emerging behind agentic AI, General AI, and quantum computing.
-      </p>
-        My goal is simple: make your cloud an advantage that others wish they had.
-      </p>
-      </p>
-    </section>
-  </main>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">D<span>Kerget</span><span style="color:var(--green)">.</span></div>
+    <input type="checkbox" id="nav-toggle"/>
+    <label class="hamburger" for="nav-toggle"><span></span><span></span><span></span></label>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="https://kerget.com/#skills">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="assets/docs/KD_CV_2025.pdf" target="_blank" class="btn btn-primary">Resume</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <footer>
-    <p>&copy; 2025 Dmitriy Kerget</p>
-  </footer>
+<div id="hero">
+  <div class="hero-inner">
+    <div class="hero-status"><span class="dot"></span> Open to new opportunities</div>
+    <h1 class="hero-name">Dmitriy <span>Kerget</span></h1>
+    <div class="hero-role">Cloud Network Engineer &amp; Infrastructure Specialist</div>
+    <p class="hero-desc">I build Azure environments that are clean, resilient, and easy to understand. Secure cloud architecture that scales with you — whether you're adopting Copilot, Fabric, or the next wave of Microsoft technologies.</p>
+    <div class="hero-cta">
+      <a href="https://kerget.com/#contact" class="btn btn-primary">Get in touch</a>
+      <a href="projects.html" class="btn btn-outline">View projects</a>
+      <a href="assets/docs/KD_CV_2025.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+    </div>
+
+    <div class="timeline-intro">// Career journey</div>
+    <div class="journey">
+      <div class="jstep">
+        <div class="jline"><div class="jdot"></div><div class="jconnect"></div></div>
+        <div class="jcontent"><div class="jyear">2007</div><div class="jtext"><strong>Started as Network Administrator</strong> — budget-tight environments, many hats, zero room for mistakes.</div></div>
+      </div>
+      <div class="jstep">
+        <div class="jline"><div class="jdot"></div><div class="jconnect"></div></div>
+        <div class="jcontent"><div class="jyear">2015+</div><div class="jtext"><strong>Shifted to cloud</strong> — deep focus on Microsoft Azure, hybrid infrastructure, and identity.</div></div>
+      </div>
+      <div class="jstep">
+        <div class="jline"><div class="jdot"></div><div class="jconnect"></div></div>
+        <div class="jcontent"><div class="jyear">Recent</div><div class="jtext"><strong>Alcoholics Anonymous</strong> — cloud engineering for mission-critical, high-trust infrastructure.</div></div>
+      </div>
+      <div class="jstep">
+        <div class="jline"><div class="jdot" style="background:var(--green);box-shadow:0 0 6px rgba(0,255,136,0.4)"></div></div>
+        <div class="jcontent"><div class="jyear">Now</div><div class="jtext"><strong>Available</strong> — focused on AI-era cloud architecture, Zero Trust, and agentic AI patterns.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <section id="philosophy">
+    <div class="section-label">// Approach</div>
+    <h2 style="font-size:1.6rem;margin-bottom:0.5rem;color:var(--text)">How I think about cloud</h2>
+    <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.9rem;margin-bottom:0">Strong infrastructure isn't about enabling every feature. It's about selecting what fits, building it correctly from day one, and making security, cost, automation, and M365 integration work seamlessly together.</p>
+    <div class="phil-grid">
+      <div class="phil-card">
+        <h3>Security first</h3>
+        <p>Zero Trust isn't a product — it's a mindset. Every design starts with identity, least privilege, and the assumption that the perimeter doesn't exist.</p>
+      </div>
+      <div class="phil-card">
+        <h3>Automate everything</h3>
+        <p>If you do it twice, it should be code. Terraform, Bicep, PowerShell — repeatable infrastructure eliminates drift, reduces risk, and frees teams to focus on outcomes.</p>
+      </div>
+      <div class="phil-card">
+        <h3>Cost is architecture</h3>
+        <p>Cloud spend is a design decision, not an afterthought. Governance, reserved instances, autoscaling, and advisor recommendations are built in from the start.</p>
+      </div>
+      <div class="phil-card">
+        <h3>AI-ready by default</h3>
+        <p>The next wave is agentic AI and Copilot integration. Infrastructure built today needs clean identity, secure APIs, and governance policies that AI workloads can rely on.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="section-label">// Current focus</div>
+    <h2 style="font-size:1.6rem;margin-bottom:0.5rem;color:var(--text)">What I'm working on</h2>
+    <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.9rem;margin-bottom:0">Areas I'm actively deepening as the cloud and AI landscape evolves.</p>
+    <div class="focus-grid">
+      <div class="focus-item">
+        <div class="focus-icon">01 // Azure</div>
+        <h3>AZ-104 Certification</h3>
+        <p>Formalizing 10+ years of hands-on Azure experience with Microsoft's Azure Administrator credential.</p>
+      </div>
+      <div class="focus-item">
+        <div class="focus-icon">02 // AI</div>
+        <h3>Agentic AI &amp; Copilot</h3>
+        <p>Studying practical AI adoption patterns — Security Copilot, M365 Copilot, and agentic workflows on Azure OpenAI.</p>
+      </div>
+      <div class="focus-item">
+        <div class="focus-icon">03 // IaC</div>
+        <h3>SMB Onboarding Frameworks</h3>
+        <p>Building reusable Terraform + policy templates so small businesses can adopt secure Azure with confidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-strip">
+    <div class="cta-box">
+      <h2>Ready to make your cloud an <span>advantage</span></h2>
+      <p>Whether you need a senior Azure engineer for a full-time role, a consultant to lead a migration, or a fractional infrastructure lead — let's talk.</p>
+      <div class="cta-btns">
+        <a href="https://kerget.com/#contact" class="btn btn-primary">Start a conversation</a>
+        <a href="projects.html" class="btn btn-outline">See my work</a>
+        <a href="about.html" class="btn btn-outline">More about me</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank">LinkedIn</a>
+    <a href="https://kerget.com" target="_blank">Kerget.com</a>
+    <a href="assets/docs/KD_CV_2025.pdf" target="_blank">Resume</a>
+  </div>
+  <div>Dmitriy <span>Kerget</span> &copy; 2025 &mdash; Cloud Network Engineer</div>
+  <div style="margin-top:4px;color:#2a3545">Built with purpose. Secured by design.</div>
+</footer>
+
 </body>
-
 </html>
