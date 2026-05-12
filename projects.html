@@ -1,58 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Projects | Dima Kerget</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects | Dmitriy Kerget</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0d12;
+      --bg2: #0f1318;
+      --bg3: #141920;
+      --green: #00ff88;
+      --green2: #00cc6a;
+      --blue: #4fc3f7;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #1e2733;
+      --card: #111720
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none
+    }
+
+    a:hover {
+      color: var(--green2)
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 0 2rem
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px
+    }
+
+    .logo span {
+      color: var(--muted)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green)
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      transition: all 0.2s
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #0a0d12;
+      font-weight: 700
+    }
+
+    .btn-primary:hover {
+      background: var(--green2)
+    }
+
+    .btn-outline {
+      border: 1px solid var(--green);
+      color: var(--green);
+      background: transparent
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 255, 136, 0.08)
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--muted)
+    }
+
+    #nav-toggle {
+      display: none
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem
+    }
+
+    .hero-strip {
+      padding: 8rem 0 3rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem
+    }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding: 4rem 0
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem;
+      transition: border-color 0.2s
+    }
+
+    .project-card:hover {
+      border-color: rgba(0, 255, 136, 0.25)
+    }
+
+    .proj-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: rgba(0, 255, 136, 0.15);
+      font-family: 'Courier New', monospace;
+      padding-top: 2px;
+      line-height: 1
+    }
+
+    .proj-body h2 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.7rem;
+      line-height: 1.4
+    }
+
+    .proj-body p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.2rem
+    }
+
+    .proj-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.2rem
+    }
+
+    .proj-meta-item {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif
+    }
+
+    .proj-meta-item .label {
+      color: var(--muted);
+      margin-right: 4px
+    }
+
+    .proj-meta-item .val {
+      color: var(--text)
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px
+    }
+
+    .proj-tags span {
+      font-size: 0.72rem;
+      color: var(--green);
+      background: rgba(0, 255, 136, 0.07);
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      padding: 3px 10px;
+      border-radius: 2px;
+      font-family: 'Courier New', monospace
+    }
+
+    .impact-line {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--blue);
+      font-family: 'Courier New', monospace;
+      margin-top: 0.8rem
+    }
+
+    .impact-line::before {
+      content: '// ';
+      color: var(--border)
+    }
+
+    .wip-section {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid var(--border)
+    }
+
+    .wip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .wip-card {
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 1.3rem
+    }
+
+    .wip-card h3 {
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 0.5rem
+    }
+
+    .wip-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-family: system-ui, sans-serif
+    }
+
+    .wip-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-bottom: 0.7rem;
+      font-family: 'Courier New', monospace
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace
+    }
+
+    footer span {
+      color: var(--green)
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
+    }
+
+    .footer-links a:hover {
+      color: var(--green)
+    }
+
+    @media(max-width:768px) {
+      .project-card {
+        grid-template-columns: 1fr
+      }
+
+      .proj-num {
+        display: none
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 13, 18, 0.98);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.5rem
+      }
+
+      #nav-toggle:checked~.nav-links {
+        display: flex
+      }
+
+      .hamburger {
+        display: flex
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header class="hero">
-    <h1>Cloud Projects</h1>
-    <nav>
-      <a href="index.html">Home</a> |
-      <a href="about.html">About</a> |
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">D<span>Kerget</span><span style="color:var(--green)">.</span></div>
+      <input type="checkbox" id="nav-toggle" />
+      <label class="hamburger" for="nav-toggle"><span></span><span></span><span></span></label>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="assets/docs/resume.pdf" target="_blank" class="btn btn-primary">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <main>
-    <section>
-      <h2>Featured Projects</h2>
+  <div class="page">
+    <div class="hero-strip">
+      <div class="section-label">// Projects</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);margin-bottom:0.6rem">Featured <span
+          style="color:var(--green)">work</span></h1>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.92rem;max-width:600px;line-height:1.8">
+        Real-world Azure infrastructure projects — each one designed for security, cost efficiency, and operational
+        clarity.</p>
+    </div>
 
-      <div class="project">
-        <h3>Hybrid Azure Infrastructure Deployment</h3>
-        <p>Designed and deployed a hybrid environment for a mid-sized enterprise, enabling seamless integration of on-prem infrastructure with Microsoft Azure using VPN Gateway and Azure AD Connect.</p>
-        <ul>
-          <li><strong>Tools:</strong> Azure, PowerShell, Azure AD, VPN Gateway</li>
-          <li><strong>Focus:</strong> Scalability, authentication, hybrid networking</li>
-        </ul>
+    <div class="projects-list">
+      <div class="project-card">
+        <div class="proj-num">01</div>
+        <div class="proj-body">
+          <h2>Hybrid Azure Infrastructure Deployment</h2>
+          <div class="proj-meta">
+            <div class="proj-meta-item"><span class="label">Focus:</span><span class="val">Hybrid networking &amp;
+                identity</span></div>
+            <div class="proj-meta-item"><span class="label">Scale:</span><span class="val">Mid-sized enterprise</span>
+            </div>
+          </div>
+          <p>Designed and deployed a hybrid environment for a mid-sized enterprise, enabling seamless integration of
+            on-premises infrastructure with Microsoft Azure using VPN Gateway and Entra ID Connect. The project
+            prioritized authentication continuity, least-privilege access, and minimal migration downtime — keeping
+            business operations uninterrupted throughout the transition.</p>
+          <div class="proj-tags">
+            <span>Azure</span><span>VPN Gateway</span><span>Entra ID</span><span>PowerShell</span><span>Hybrid
+              Networking</span>
+          </div>
+          <div class="impact-line">Seamless hybrid identity &amp; network integration</div>
+        </div>
       </div>
 
-      <div class="project">
-        <h3>Cost Optimization with Terraform</h3>
-        <p>Created reusable Terraform modules to automate Azure infrastructure provisioning. Reduced monthly cloud spend by 28% through autoscaling policies and reserved instance planning.</p>
-        <ul>
-          <li><strong>Tools:</strong> Terraform, Azure Monitor, GitHub Actions</li>
-          <li><strong>Focus:</strong> Automation, cost savings, IaC</li>
-        </ul>
+      <div class="project-card">
+        <div class="proj-num">02</div>
+        <div class="proj-body">
+          <h2>IaC Cost Optimization with Terraform</h2>
+          <div class="proj-meta">
+            <div class="proj-meta-item"><span class="label">Focus:</span><span class="val">Automation &amp; cost
+                governance</span></div>
+            <div class="proj-meta-item"><span class="label">Result:</span><span class="val"
+                style="color:var(--green)">28% monthly cost reduction</span></div>
+          </div>
+          <p>Built reusable Terraform modules to automate Azure infrastructure provisioning end-to-end. Implemented
+            autoscaling policies, reserved instance planning, and Azure Advisor integration to eliminate idle spend.
+            Deployed via GitHub Actions CI/CD pipelines to ensure consistent, repeatable deployments across environments
+            — reducing configuration drift and human error.</p>
+          <div class="proj-tags">
+            <span>Terraform</span><span>GitHub Actions</span><span>Azure Monitor</span><span>IaC</span><span>Cost
+              Management</span>
+          </div>
+          <div class="impact-line">28% monthly cloud cost reduction achieved</div>
+        </div>
       </div>
 
-      <div class="project">
-        <h3>Zero Trust Security Implementation</h3>
-        <p>Implemented Conditional Access, MFA, and identity-based segmentation across Microsoft 365 and Azure AD. Hardened infrastructure using Defender for Cloud and Microsoft Sentinel.</p>
-        <ul>
-          <li><strong>Tools:</strong> Azure AD, Defender, Sentinel, Intune</li>
-          <li><strong>Focus:</strong> Cloud security, compliance, monitoring</li>
-        </ul>
+      <div class="project-card">
+        <div class="proj-num">03</div>
+        <div class="proj-body">
+          <h2>Zero Trust Security Implementation</h2>
+          <div class="proj-meta">
+            <div class="proj-meta-item"><span class="label">Focus:</span><span class="val">Cloud security &amp;
+                compliance</span></div>
+            <div class="proj-meta-item"><span class="label">Scope:</span><span class="val">M365 + Azure workloads</span>
+            </div>
+          </div>
+          <p>Implemented Conditional Access policies, MFA, and identity-based segmentation across Microsoft 365 and
+            Azure. Hardened infrastructure using Defender for Cloud secure score recommendations and deployed Microsoft
+            Sentinel for centralized threat detection with automated incident response playbooks — reducing mean time to
+            detect and respond to security events.</p>
+          <div class="proj-tags">
+            <span>Entra ID</span><span>Defender for Cloud</span><span>Sentinel</span><span>Intune</span><span>Zero
+              Trust</span>
+          </div>
+          <div class="impact-line">Full Zero Trust posture — identity to workload</div>
+        </div>
       </div>
+    </div>
 
-    </section>
-  </main>
+    <div class="wip-section">
+      <div class="section-label">// In progress</div>
+      <h2 style="font-size:1.4rem;color:var(--text);margin-bottom:0.4rem">Currently building</h2>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.88rem">Projects actively in development.
+      </p>
+      <div class="wip-grid">
+        <div class="wip-card">
+          <div class="wip-badge">in progress</div>
+          <h3>SMB Cloud Onboarding Framework</h3>
+          <p>Reusable Terraform + Azure Policy templates giving small businesses a secure, governed Azure baseline out
+            of the box.</p>
+        </div>
+        <div class="wip-card">
+          <div class="wip-badge">in progress</div>
+          <h3>AZ-104 Certification</h3>
+          <p>Formalizing 10+ years of hands-on Azure experience with Microsoft's Azure Administrator Associate
+            credential.</p>
+        </div>
+        <div class="wip-card">
+          <div class="wip-badge">exploring</div>
+          <h3>Agentic AI &amp; Security Copilot</h3>
+          <p>Studying practical AI-powered cloud ops patterns — Security Copilot, M365 Copilot, and Azure OpenAI agentic
+            workflows.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Dima Kerget</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank">LinkedIn</a>
+      <a href="https://kerget.com" target="_blank">Kerget.com</a>
+      <a href="assets/docs/resume.pdf" target="_blank">Resume</a>
+    </div>
+    <div>Dmitriy <span>Kerget</span> &copy; 2025 &mdash; Cloud Network Engineer</div>
+    <div style="margin-top:4px;color:#2a3545">Built with purpose. Secured by design.</div>
   </footer>
 </body>
+
 </html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skills | Dmitriy Kerget</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0d12;
+      --bg2: #0f1318;
+      --bg3: #141920;
+      --green: #00ff88;
+      --green2: #00cc6a;
+      --blue: #4fc3f7;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #1e2733;
+      --card: #111720
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none
+    }
+
+    a:hover {
+      color: var(--green2)
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 0 2rem
+    }
+
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px
+    }
+
+    .logo span {
+      color: var(--muted)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green)
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      transition: all 0.2s
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #0a0d12;
+      font-weight: 700
+    }
+
+    .btn-primary:hover {
+      background: var(--green2)
+    }
+
+    .btn-outline {
+      border: 1px solid var(--green);
+      color: var(--green);
+      background: transparent
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 255, 136, 0.08)
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--muted)
+    }
+
+    #nav-toggle {
+      display: none
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem
+    }
+
+    .hero-strip {
+      padding: 8rem 0 3rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem
+    }
+
+    /* CERTS */
+    .certs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid rgba(0, 255, 136, 0.22);
+      border-radius: 6px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .cert-badge {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--green);
+      text-align: center;
+      line-height: 1.2;
+      flex-shrink: 0
+    }
+
+    .cert-name {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-family: system-ui, sans-serif
+    }
+
+    .cert-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: 'Courier New', monospace
+    }
+
+    /* SKILLS GRID */
+    .skills-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem
+    }
+
+    .skill-cat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.2s
+    }
+
+    .skill-cat:hover {
+      border-color: rgba(79, 195, 247, 0.2)
+    }
+
+    .skill-cat-title {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .skill-cat-title::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: var(--blue)
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .tag {
+      background: rgba(79, 195, 247, 0.06);
+      border: 1px solid rgba(79, 195, 247, 0.15);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      font-family: 'Courier New', monospace
+    }
+
+    .tag.green {
+      background: rgba(0, 255, 136, 0.06);
+      border-color: rgba(0, 255, 136, 0.2);
+      color: var(--green)
+    }
+
+    /* PROFICIENCY */
+    .prof-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .prof-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem
+    }
+
+    .prof-item {
+      display: grid;
+      grid-template-columns: 220px 1fr 40px;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .prof-name {
+      font-size: 0.85rem;
+      color: var(--text);
+      font-family: system-ui, sans-serif
+    }
+
+    .prof-bar-bg {
+      background: var(--bg3);
+      border-radius: 2px;
+      height: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .prof-bar {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      transition: width 1s ease
+    }
+
+    .prof-pct {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: right
+    }
+
+    /* TOOLS */
+    .tools-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem
+    }
+
+    .tool-pill {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-family: system-ui, sans-serif;
+      transition: all 0.2s;
+      cursor: default
+    }
+
+    .tool-pill:hover {
+      border-color: var(--green);
+      color: var(--green)
+    }
+
+    /* CTA */
+    .cta-strip {
+      padding: 3rem 0 4rem
+    }
+
+    .cta-box {
+      background: var(--card);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 8px;
+      padding: 2.5rem;
+      text-align: center
+    }
+
+    .cta-box h2 {
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 0.8rem
+    }
+
+    .cta-box h2 span {
+      color: var(--green)
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      margin-bottom: 1.8rem;
+      line-height: 1.8
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace
+    }
+
+    footer span {
+      color: var(--green)
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
+    }
+
+    .footer-links a:hover {
+      color: var(--green)
+    }
+
+    @media(max-width:768px) {
+      .prof-item {
+        grid-template-columns: 1fr 80px;
+        grid-template-rows: auto auto
+      }
+
+      .prof-name {
+        grid-column: 1;
+        grid-row: 1
+      }
+
+      .prof-pct {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: right
+      }
+
+      .prof-bar-bg {
+        grid-column: 1/-1;
+        grid-row: 2
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 13, 18, 0.98);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.5rem
+      }
+
+      #nav-toggle:checked~.nav-links {
+        display: flex
+      }
+
+      .hamburger {
+        display: flex
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">D<span>Kerget</span><span style="color:var(--green)">.</span></div>
+      <input type="checkbox" id="nav-toggle" />
+      <label class="hamburger" for="nav-toggle"><span></span><span></span><span></span></label>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="skills.html" class="active">Skills</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="assets/docs/resume.pdf" target="_blank" class="btn btn-primary">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="hero-strip">
+      <div class="section-label">// Skills & Stack</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);margin-bottom:0.6rem">Technical <span
+          style="color:var(--green)">proficiency</span></h1>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.92rem;max-width:600px;line-height:1.8">
+        10+ years of hands-on experience across cloud infrastructure, security, automation, and AI-powered operations —
+        primarily on Microsoft Azure.</p>
+    </div>
+
+    <!-- CERTS -->
+    <div style="padding:3rem 0 0">
+      <div class="section-label">// Certifications</div>
+      <h2 style="font-size:1.4rem;color:var(--text);margin-bottom:0.3rem">Credentials</h2>
+      <div class="certs-row">
+        <div class="cert-card">
+          <div class="cert-badge">AZ<br />104</div>
+          <div>
+            <div class="cert-name">Microsoft Azure Administrator</div>
+            <div class="cert-sub">AZ-104 &mdash; <span style="color:#f59e0b">in progress</span></div>
+          </div>
+        </div>
+        <div class="cert-card" style="opacity:0.55;border-color:var(--border)">
+          <div class="cert-badge" style="border-color:var(--border);color:var(--muted)">AZ<br />500</div>
+          <div>
+            <div class="cert-name" style="color:var(--muted)">Microsoft Azure Security Engineer</div>
+            <div class="cert-sub">AZ-500 &mdash; <span style="color:#3a4560">planned</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS BY CATEGORY -->
+    <div class="skills-section">
+      <div class="section-label">// Categories</div>
+      <h2 style="font-size:1.4rem;color:var(--text);margin-bottom:0.3rem">Skills by domain</h2>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.88rem">Technologies and platforms I work
+        with across cloud, security, and automation.</p>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <div class="skill-cat-title">Cloud Platform</div>
+          <div class="skill-tags">
+            <span class="tag green">Microsoft Azure</span>
+            <span class="tag">Azure Monitor</span>
+            <span class="tag">Azure Sentinel</span>
+            <span class="tag">Azure Functions</span>
+            <span class="tag">Azure OpenAI</span>
+            <span class="tag">Log Analytics</span>
+            <span class="tag">App Services</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Infrastructure as Code</div>
+          <div class="skill-tags">
+            <span class="tag green">Terraform</span>
+            <span class="tag">Bicep</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">ARM Templates</span>
+            <span class="tag">PowerShell</span>
+            <span class="tag">Azure CLI</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Identity & Access</div>
+          <div class="skill-tags">
+            <span class="tag green">Entra ID</span>
+            <span class="tag">Conditional Access</span>
+            <span class="tag">MFA / SSO</span>
+            <span class="tag">RBAC</span>
+            <span class="tag">PIM</span>
+            <span class="tag">B2B / B2C</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Security</div>
+          <div class="skill-tags">
+            <span class="tag green">Zero Trust</span>
+            <span class="tag">Defender for Cloud</span>
+            <span class="tag">Microsoft Sentinel</span>
+            <span class="tag">Microsoft Intune</span>
+            <span class="tag">Purview</span>
+            <span class="tag">DLP</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Networking</div>
+          <div class="skill-tags">
+            <span class="tag green">VPN Gateway</span>
+            <span class="tag">ExpressRoute</span>
+            <span class="tag">NSGs</span>
+            <span class="tag">Private Link</span>
+            <span class="tag">Azure Firewall</span>
+            <span class="tag">DNS</span>
+            <span class="tag">Load Balancer</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">AI & Modern Ops</div>
+          <div class="skill-tags">
+            <span class="tag green">Microsoft Copilot</span>
+            <span class="tag">Security Copilot</span>
+            <span class="tag">M365 Copilot</span>
+            <span class="tag">Azure OpenAI</span>
+            <span class="tag">Fabric</span>
+            <span class="tag">API Management</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">Governance & Compliance</div>
+          <div class="skill-tags">
+            <span class="tag green">Azure Policy</span>
+            <span class="tag">Blueprints</span>
+            <span class="tag">Policy-as-Code</span>
+            <span class="tag">Cost Management</span>
+            <span class="tag">Azure Advisor</span>
+            <span class="tag">Budgets & Alerts</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <div class="skill-cat-title">DevSecOps</div>
+          <div class="skill-tags">
+            <span class="tag green">GitHub Actions</span>
+            <span class="tag">GitHub Advanced Security</span>
+            <span class="tag">Defender for DevOps</span>
+            <span class="tag">CI/CD Pipelines</span>
+            <span class="tag">Secret Scanning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFICIENCY BARS -->
+    <div class="prof-section">
+      <div class="section-label">// Depth</div>
+      <h2 style="font-size:1.4rem;color:var(--text);margin-bottom:0.3rem">Proficiency levels</h2>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.88rem">Self-assessed based on 10+ years
+        of hands-on production experience.</p>
+      <div class="prof-list" id="prof-list">
+        <div class="prof-item">
+          <div class="prof-name">Microsoft Azure</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="95" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">95%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">Terraform / IaC</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="88" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">88%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">PowerShell / Azure CLI</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="90" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">90%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">Entra ID / Identity</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="90" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">90%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">Zero Trust / Security</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="85" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">85%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">Azure Networking</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="88" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">88%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">Microsoft Sentinel / SIEM</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="80" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">80%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">AI / Copilot Integration</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="72" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">72%</div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-name">GitHub Actions / DevSecOps</div>
+          <div class="prof-bar-bg">
+            <div class="prof-bar" data-w="78" style="width:0%"></div>
+          </div>
+          <div class="prof-pct">78%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS & PLATFORMS -->
+    <div class="tools-section">
+      <div class="section-label">// Tools & Platforms</div>
+      <h2 style="font-size:1.4rem;color:var(--text);margin-bottom:0.3rem">Also worked with</h2>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.88rem">Additional tools and platforms
+        across my career.</p>
+      <div class="tools-grid">
+        <span class="tool-pill">Microsoft 365</span>
+        <span class="tool-pill">SharePoint Online</span>
+        <span class="tool-pill">Teams</span>
+        <span class="tool-pill">Exchange Online</span>
+        <span class="tool-pill">Windows Server</span>
+        <span class="tool-pill">Active Directory</span>
+        <span class="tool-pill">Hyper-V</span>
+        <span class="tool-pill">VMware</span>
+        <span class="tool-pill">Git / GitHub</span>
+        <span class="tool-pill">VS Code</span>
+        <span class="tool-pill">Logic Apps</span>
+        <span class="tool-pill">Power Automate</span>
+        <span class="tool-pill">Azure DevOps</span>
+        <span class="tool-pill">Jira</span>
+        <span class="tool-pill">ServiceNow</span>
+        <span class="tool-pill">Wireshark</span>
+        <span class="tool-pill">Nessus</span>
+        <span class="tool-pill">Cisco Networking</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+      <div class="cta-box">
+        <h2>Looking for a <span>senior Azure engineer</span>?</h2>
+        <p>Available for full-time roles, consulting, and freelance cloud projects. Let's talk about what you need.</p>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn btn-primary">Get in touch</a>
+          <a href="projects.html" class="btn btn-outline">See my work</a>
+          <a href="assets/docs/resume.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank">LinkedIn</a>
+      <a href="https://vedicdog.com" target="_blank">vedicdog.com</a>
+    </div>
+    <div>Dmitriy <span>Kerget</span> &copy; 2025 &mdash; Cloud Network Engineer</div>
+    <div style="margin-top:4px;color:#2a3545">Built with purpose. Secured by design.</div>
+  </footer>
+
+  <script>
+    // Animate proficiency bars on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.prof-bar').forEach(bar => {
+          bar.style.width = bar.dataset.w + '%';
+        });
+      }, 300);
+    });
+  </script>
+</body>
+
+</html>

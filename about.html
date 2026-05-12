@@ -3,106 +3,531 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About | Dmitriy Kerget</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .about-section {
-      padding: 0.5em 1.5em 2em;
-      max-width: 900px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0d12;
+      --bg2: #0f1318;
+      --bg3: #141920;
+      --green: #00ff88;
+      --green2: #00cc6a;
+      --blue: #4fc3f7;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #1e2733;
+      --card: #111720
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none
+    }
+
+    a:hover {
+      color: var(--green2)
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      padding: 0 2rem
+    }
+
+    .nav-inner {
+      max-width: 960px;
       margin: 0 auto;
-      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px
     }
 
-    .about-section h1 {
-      font-size: 2em;
-      margin-bottom: 1em;
-      font-weight: 600;
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px
     }
 
-    .about-section p {
-      font-size: 1.1em;
-      line-height: 1.6em;
-      margin-bottom: 1.2em;
+    .logo span {
+      color: var(--muted)
     }
 
-    .about-section p:last-of-type {
-      margin-bottom: 0.5em;
-      /* reduce spacing before Core Competencies */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center
     }
 
-    .competencies {
-      max-width: 900px;
-      margin: 0 auto 3em;
-      padding: 0 1.5em;
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
     }
 
-    .competencies h2 {
-      margin-bottom: 1em;
-      font-weight: 600;
-      font-size: 1.4em;
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green)
     }
 
-    .competencies ul {
-      padding-left: 1.5em;
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      transition: all 0.2s
     }
 
-    .competencies li {
-      margin-bottom: 0.6em;
+    .btn-primary {
+      background: var(--green);
+      color: #0a0d12;
+      font-weight: 700
+    }
+
+    .btn-primary:hover {
+      background: var(--green2)
+    }
+
+    .btn-outline {
+      border: 1px solid var(--green);
+      color: var(--green);
+      background: transparent
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 255, 136, 0.08)
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--muted)
+    }
+
+    #nav-toggle {
+      display: none
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem
+    }
+
+    .hero-strip {
+      padding: 8rem 0 3rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    section:last-of-type {
+      border-bottom: none
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-family: system-ui, sans-serif;
+      font-size: 0.93rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem
+    }
+
+    .sidebar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem
+    }
+
+    .sidebar-card h3 {
+      font-size: 0.72rem;
+      color: var(--green);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem
+    }
+
+    .sidebar-list {
+      list-style: none
+    }
+
+    .sidebar-list li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .sidebar-list li:last-child {
+      border-bottom: none
+    }
+
+    .sidebar-list li::before {
+      content: '>';
+      color: var(--green);
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      flex-shrink: 0
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 6px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1rem
+    }
+
+    .cert-badge {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--green);
+      text-align: center;
+      line-height: 1.2;
+      flex-shrink: 0
+    }
+
+    .cert-name {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-family: system-ui, sans-serif
+    }
+
+    .cert-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: 'Courier New', monospace
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem
+    }
+
+    .comp-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.3rem;
+      border-left: 2px solid var(--green)
+    }
+
+    .comp-item h3 {
+      font-size: 0.78rem;
+      color: var(--green);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem
+    }
+
+    .comp-item p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-family: system-ui, sans-serif
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace
+    }
+
+    footer span {
+      color: var(--green)
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s
+    }
+
+    .footer-links a:hover {
+      color: var(--green)
+    }
+
+    @media(max-width:768px) {
+      .about-grid {
+        grid-template-columns: 1fr
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 13, 18, 0.98);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.5rem
+      }
+
+      #nav-toggle:checked~.nav-links {
+        display: flex
+      }
+
+      .hamburger {
+        display: flex
+      }
     }
   </style>
 </head>
 
 <body>
-  <header class="hero">
-    <h1>About Me</h1>
-    <nav>
-      <a href="index.html">Home</a> |
-      <a href="projects.html">Projects</a> |
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="about-section">
-      <h1>Hello, my name is Dmitriy Kerget</h1>
-      <p>
-        I am a Cloud Network Engineer with over 10 years of experience designing, deploying, and securing hybrid and
-        cloud-native infrastructure, primarily in Microsoft Azure.
-      </p>
-      <p>
-        My work focuses on automation, governance, identity, networking, and cybersecurity. I help businesses scale
-        securely and cost-effectively by implementing Infrastructure-as-Code using Terraform and PowerShell, along with
-        applying MFA and Zero Trust principles, Conditional Access policies, and advanced monitoring strategies.
-      </p>
-      <p>
-        I am currently building reusable cloud onboarding frameworks for small and mid-sized businesses (SMBs), helping
-        them adopt secure cloud practices in fast-paced environments.
-      </p>
-    </section>
-
-    <section class="competencies">
-      <h2>Core Competencies</h2>
-      <ul>
-        <li>Azure Infrastructure & Security (incl. Microsoft Defender for Cloud)</li>
-        <li>Hybrid Networking (VPN, ExpressRoute, NSGs, Private Link)</li>
-        <li>Infrastructure as Code (Terraform, Bicep, GitHub Actions)</li>
-        <li>Identity & Access Management (Entra ID, SSO, Conditional Access)</li>
-        <li>Automation & Scripting (PowerShell, Azure CLI, Logic Apps)</li>
-        <li>Governance & Compliance (Azure Policy, Blueprints, Purview)</li>
-        <li>Monitoring & Incident Response (Azure Monitor, Log Analytics, Sentinel)</li>
-        <li>AI-Powered Cloud Optimization (Azure OpenAI, Cost Analysis, Advisor)</li>
-        <li>Microsoft Copilot Integration (M365 + Security Copilot)</li>
-        <li>Secure App Development with Azure Functions + API Management</li>
-        <li>DevSecOps & Policy-as-Code (GitHub Advanced Security, Defender for DevOps)</li>
-        
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">D<span>Kerget</span><span style="color:var(--green)">.</span></div>
+      <input type="checkbox" id="nav-toggle" />
+      <label class="hamburger" for="nav-toggle"><span></span><span></span><span></span></label>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="assets/docs/resume.pdf" target="_blank" class="btn btn-primary">Resume</a></li>
       </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="hero-strip">
+      <div class="section-label">// About me</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);margin-bottom:0.5rem">Hello, I'm <span
+          style="color:var(--green)">Dmitriy Kerget</span></h1>
+      <p style="color:var(--blue);font-size:1rem;margin-bottom:1.5rem">Cloud Network Engineer &amp; Infrastructure
+        Specialist</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="assets/docs/resume.pdf" target="_blank" class="btn btn-primary">Download CV</a>
+        <a href="contact.html" class="btn btn-outline">Get in touch</a>
+        <a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-label">// Background</div>
+      <h2 style="font-size:1.5rem;color:var(--text);margin-bottom:1.5rem">10+ years building infrastructure others rely
+        on</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am a Cloud Network Engineer with over 10 years of experience designing, deploying, and securing hybrid
+            and cloud-native infrastructure, primarily on Microsoft Azure. My work spans automation, governance,
+            identity, networking, and cybersecurity.</p>
+          <p>My career began in 2007 as a network administrator — working in budget-constrained environments where
+            wearing many hats and getting things right the first time wasn't optional. That foundation shaped how I
+            approach every infrastructure problem: understand every layer, secure from day one, automate everything
+            repeatable.</p>
+          <p>Most recently I supported Alcoholics Anonymous through cloud transitions — mission-critical, high-trust
+            environments where uptime and data security are non-negotiable. I help businesses scale securely and
+            cost-effectively using Infrastructure-as-Code, Zero Trust principles, and advanced monitoring strategies.
+          </p>
+          <p>I am currently building reusable cloud onboarding frameworks for small and mid-sized businesses (SMBs),
+            helping them adopt secure cloud practices in fast-paced environments — and actively following the emergence
+            of agentic AI and Copilot integration in cloud operations.</p>
+        </div>
+        <div>
+          <div class="sidebar-card" style="margin-bottom:1.2rem">
+            <h3>&gt; Quick facts</h3>
+            <ul class="sidebar-list">
+              <li>10+ years in IT &amp; cloud</li>
+              <li>Based in Texas, USA</li>
+              <li>Primary platform: Azure</li>
+              <li>Open to remote &amp; hybrid</li>
+              <li>Available immediately</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <h3>&gt; Links</h3>
+            <ul class="sidebar-list">
+              <li><a href="https://kerget.com" style="color:var(--blue)">kerget.com</a></li>
+              <li><a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank"
+                  style="color:var(--blue)">LinkedIn</a></li>
+              <li><a href="https://github.com/Dkerget" target="_blank" style="color:var(--blue)">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
-  </main>
+
+    <section>
+      <div class="section-label">// Certifications</div>
+      <h2 style="font-size:1.5rem;color:var(--text);margin-bottom:1.5rem">Credentials</h2>
+      <div class="cert-card">
+        <div class="cert-badge">AZ<br />104</div>
+        <div>
+          <div class="cert-name">Microsoft Azure Administrator</div>
+          <div class="cert-sub">AZ-104 &mdash; <span style="color:#f59e0b">in progress</span></div>
+        </div>
+      </div>
+      <div class="cert-card" style="opacity:0.55;border-color:var(--border)">
+        <div class="cert-badge" style="border-color:var(--border);color:var(--muted)">AZ<br />500</div>
+        <div>
+          <div class="cert-name" style="color:var(--muted)">Microsoft Azure Security Engineer</div>
+          <div class="cert-sub">AZ-500 &mdash; <span style="color:#3a4560">planned</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">// Competencies</div>
+      <h2 style="font-size:1.5rem;color:var(--text);margin-bottom:0.3rem">Core expertise</h2>
+      <p style="color:var(--muted);font-family:system-ui,sans-serif;font-size:0.88rem;margin-bottom:0">Technical domains
+        I work in across cloud, security, and automation.</p>
+      <div class="comp-grid">
+        <div class="comp-item">
+          <h3>Cloud Infrastructure</h3>
+          <p>Azure infrastructure &amp; security including Microsoft Defender for Cloud, VMs, App Services, and storage
+            architecture.</p>
+        </div>
+        <div class="comp-item">
+          <h3>Hybrid Networking</h3>
+          <p>VPN Gateway, ExpressRoute, NSGs, Private Link, Azure Firewall — connecting on-prem and cloud seamlessly.
+          </p>
+        </div>
+        <div class="comp-item">
+          <h3>Infrastructure as Code</h3>
+          <p>Terraform, Bicep, GitHub Actions, ARM Templates — repeatable, version-controlled infrastructure at any
+            scale.</p>
+        </div>
+        <div class="comp-item">
+          <h3>Identity &amp; Access</h3>
+          <p>Entra ID, SSO, Conditional Access, MFA — identity-first security across Microsoft 365 and Azure workloads.
+          </p>
+        </div>
+        <div class="comp-item">
+          <h3>Automation &amp; Scripting</h3>
+          <p>PowerShell, Azure CLI, Logic Apps — eliminating manual toil and building reliable operational workflows.
+          </p>
+        </div>
+        <div class="comp-item">
+          <h3>Governance &amp; Compliance</h3>
+          <p>Azure Policy, Blueprints, Purview — policy-as-code frameworks that enforce standards without slowing teams
+            down.</p>
+        </div>
+        <div class="comp-item">
+          <h3>Monitoring &amp; IR</h3>
+          <p>Azure Monitor, Log Analytics, Microsoft Sentinel — detection, alerting, and automated incident response
+            pipelines.</p>
+        </div>
+        <div class="comp-item">
+          <h3>AI-Powered Cloud Ops</h3>
+          <p>Azure OpenAI, M365 Copilot, Security Copilot, Cost Advisor — bringing AI into day-to-day cloud operations.
+          </p>
+        </div>
+        <div class="comp-item">
+          <h3>DevSecOps</h3>
+          <p>GitHub Advanced Security, Defender for DevOps — shifting security left into the development pipeline.</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Dmitriy Kerget</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.linkedin.com/in/dk-4499a86/" target="_blank">LinkedIn</a>
+      <a href="https://kerget.com" target="_blank">Kerget.com</a>
+      <a href="assets/docs/resume.pdf" target="_blank">Resume</a>
+    </div>
+    <div>Dmitriy <span>Kerget</span> &copy; 2025 &mdash; Cloud Network Engineer</div>
+    <div style="margin-top:4px;color:#2a3545">Built with purpose. Secured by design.</div>
   </footer>
 </body>
 
